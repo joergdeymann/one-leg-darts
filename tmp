@@ -1,0 +1,26 @@
+    sortCheckouts(checkouts) {
+        const preferredDoubles = [20, 16, 19, 18, 10, 8, "Bullseye"];
+        let sortedCheckouts = [];
+
+        function getPreference(value) {
+            if (value === "Bullseye") return value;
+            return "D" + String(value);
+        }
+
+        function getLastWord(str) {
+            const words = str.split(' ');
+            return words[words.length - 1];
+        }
+
+        for (let double of preferredDoubles) {
+            for (let checkout of checkouts) {
+                if (getLastWord(checkout) === getPreference(double)) {
+                    sortedCheckouts.push(checkout);
+                }
+            }
+        }
+
+        const result = checkouts.filter(item => !sortedCheckouts.includes(item));
+        return sortedCheckouts.concat(result);
+    }
+

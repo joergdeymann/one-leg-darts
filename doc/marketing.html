@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --h1color: brown;
+            --color: brown; /*turquoise*/
+        }
+        body {
+            width: 90vw;
+            min-height: 100vh;
+            padding: 8px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+        header,footer,section {
+            background-color: bisque;
+            color:black;
+            margin: 0;
+            padding:0;
+            overflow: hidden;
+        }
+
+        header,section {
+            border-radius: 8px 8px 0 0;
+            box-sizing: border-box;
+            border: 2px solid var(--color);
+            margin-bottom: 8px;
+        }
+
+        header>*:not(H1),section>*:not(H1) {
+            margin: 8px;
+        }
+
+        header>h1 {
+            background-color:  var(--h1color);
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+            padding: 4px;
+
+        }
+
+        section>h1 {
+            background-color:  var(--h1color);
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+            padding: 4px;
+        }
+
+        footer {
+            padding: 16px;
+            border: 2px  var(--color) solid;
+
+        }
+
+        section:last-of-type {
+            flex:1;
+            border:none;
+            background-color: unset;
+        }
+
+        article {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            padding-left: 16px;
+        }
+        article::before {
+            position: absolute;
+            content:"X:";
+            margin-left:-16px;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
+<header>
+    <h1>Wer bin ich ?</h1>
+    <article>Mein Name ist Jörg Deymnn und ich bin am 08.09.1973 geboren.</article>
+</header>
+<section>
+    <h1>Was biete ich an ?</h1>
+    <article>Automatische Abläufe für Ihre immer wiederkehrenden Eingaben.<br>
+         Benutzen sie viele Excel Tabellen ? Das ist aufwendig. Warum nicht alles in einem Tool unterbringen.</article>
+    <article>Erstellung / Änderung von Hompages nach Ihren Vorgaben.</article>
+    <article>Programme die Ihren Bedürfnissen angepasst sind und keine Baukastensysteme</article>
+    <article>Bereits in Benutzung:<br>
+        Rechnungsprogramm mit einer Vorlage die für Sie gewohnt ist<br>
+        Mitarbeiter Zeiterfassung für Sie kostenlos angepasst<br>
+        Dokumentenverwaltung in Verbindung mit Nutzerrechten<br>
+    </article>
+    <article>Testen Sie mich und bezahlen Sie, wenn Sie meine ersten Ergebnisse gesehen haben und zufrieden sind.
+    </article>
+    
+</section>
+<section>
+    <h1>Wie unterscheide ich mich von den anderen ?</h1>
+    <article>Ich biete auf Wunsch eine Plug And Play Lösung an.
+        <br>Sie binden einen fertigen PC mit 
+        Datenbank und Programmen in einem abgesicherten Bereich in Ihr Netzwerk ein und gewähren nur 
+        die erlaubten Mitarbeiter Zugriff auf diesen PC der als Server eingebunden ist.
+    </article>
+    <article>Sie können mich 24/7 telefonisch erreichen oder per e-mail kontaktieren</article>
+    <article>Ich bin sehr schnell und flexibel in der Entwicklung und der Instalation</article>
+    <article>Ich fahre auf Wunsch zu Ihnen vor Ort und erörtere Lösungen für Ihre Anforderungen und Wünsche</article>
+</section>
+<section>
+    <h1>Was sind meine Referenzen ?</h1>
+    <article>Schauen Sie sich meine erstellten Webseiten an:<br>
+    www.die-deymanns.de - Meine Veranstalungsseite</br>
+    www.dd-office.de - Meine Office Produkte<br>
+    www.joergdeymann.de - Ein kleines Profil von mir<br>
+    </article>
+</section>  
+
+<section>
+</section>
+
+<footer>
+Mail: email@email.de, Telefon: 1234567, UID: DE12344
+</footer>

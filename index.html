@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darts</title>
+    <!-- <script src="./src/Abilities.class.js"></script> -->
+    <!-- <script src="./src/DartCheckouts.class.js"></script> -->
+    <!-- <script src="./src/DartChecks.class.js"></script>
+    <script src="./src/key.class.js"></script>     -->
+    <script type="module" src="./init.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="init()">
+<div>
+    <section class="info">
+        <div>Bord 1 - Gruppe 2</div>
+    </section>
+    <section class="name">
+        <div class="clickable active" id="player1" onclick="setup.changePlayername(1)"><div>Spieler 1</div><div>0</div></div>
+        <div class="clickable" id="player2" onClick="setup.changePlayername(2)">Spieler 2</div>
+    </section>
+    <section class="score">
+        <div id="score1">501</div>
+        <div class="leg-score">
+            <div><b>Sets:</b> Best of 4</div>
+            <div>0:2</div>
+            <div><b>Legs:</b> Best of 5</div>
+            <div>1:0</div>
+        </div>
+        <div id="score2">501</div>
+    </section>
+    <section class="history">
+        <div class="history-player" id="history-player1">
+            <div class="header">
+                <div>Throw</div>
+                <div>Score</div>
+            </div>
+        </div>
+        <div class="history-player dartcount" id="history-darts">
+            <div class="header">
+                <div>Darts</div>
+            </div>
+
+        </div>
+
+        <div class="history-player" id="history-player2">
+            <div class="header">
+                <div>Throw</div>
+                <div>Score</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="number-display">
+        <input name="Xdisplay" type="text" disabled>
+    </section>
+
+    <section class="numbers">
+            <div>
+                <div onmousedown="key.addNumberToField(7)">7</div>
+                <div onmousedown="key.addNumberToField(8)">8</div>
+                <div onmousedown="key.addNumberToField(9)">9</div>
+            </div>
+            <div>
+                <div onmousedown="key.addNumberToField(4)">4</div>
+                <div onmousedown="key.addNumberToField(5)">5</div>
+                <div onmousedown="key.addNumberToField(6)">6</div>
+            </div>  
+            <div>
+                <div onmousedown="key.addNumberToField(1)">1</div>
+                <div onmousedown="key.addNumberToField(2)">2</div>
+                <div onmousedown="key.addNumberToField(3)">3</div>
+            </div>
+            <div>
+                <div onmousedown="key.removeLastNumberFromField()" id="del" class="red">Del</div>
+                <div onmousedown="key.addNumberToField(0)">0</div>
+                <div onmousedown="key.calculateNewValues()" id="accept" class="green">Accept</div>
+            </div>    
+    </section>
+</div>
+    
+</body>
+</html>
+<!--
+other: ESC
+    undo U
+    redo SHIFT U
+    edit E
+
+    Start S
+    Abort A
+    Reset R
+
+    Accept ENTER
+
+    Game Setup: G
+
+    Player1: Aspinal
+    Player2: Bunting
+    Game: 501
+    Win Legs: 3
+    Sets: 1
+
+
+
+
+
+
+-->
