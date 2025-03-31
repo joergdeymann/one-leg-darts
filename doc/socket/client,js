@@ -1,0 +1,25 @@
+const socket = new WebSocket("ws://localhost:8080");
+
+// Verbindung herstellen
+socket.onopen = () => {
+    console.log("Verbunden mit dem Server!");
+
+    // Nachricht senden, sobald der Client gestartet wird
+    socket.send("Hallo Server, ich bin bereit!");
+};
+
+// Nachrichten vom Server empfangen
+socket.onmessage = (event) => {
+    console.log("Antwort vom Server:", event.data);
+};
+
+// Fehlerbehandlung
+socket.onerror = (error) => {
+    console.error("WebSocket-Fehler:", error);
+};
+
+// Verbindung schließen
+socket.onclose = () => {
+    console.log("Verbindung geschlossen.");
+};
+ß 

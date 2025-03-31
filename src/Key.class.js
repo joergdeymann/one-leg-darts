@@ -1,3 +1,4 @@
+
 export class Key {
     display;
     newTurn=true;
@@ -11,6 +12,7 @@ export class Key {
         1:[],
         2:[]
     }
+    dbGame;
 
     constructor() {
         window.addEventListener("keydown",(e) => {this.keydown(e)});
@@ -20,6 +22,10 @@ export class Key {
         this.display.value="";
         this.adjustDelButton();
         this.setScore(this.scoreStart);
+    }
+
+    setDB(db) {
+        this.dbGame=db;
     }
 
     keydown(event) {
@@ -109,9 +115,27 @@ export class Key {
         return document.getElementById("score"+this.activePlayerId).innerText;
     }
 
+    get scoreCount() {
+        let elements=document.querySelectorAll("#history-player"+this.cursorPosition+">div:not(.header)");
+        if (elements[elements.length-1].lastElementChild.innerText.trim()=="") return elements.length-1;
+        return elements.length;
+    }
+
+    get scoreOfCursorPosition() {
+        return document.getElementById("score"+this.cursorPosition).innerText;
+    } 
+
+    /**
+     * @param {string} score
+     */
+    set scoreOfCursorPosition(score) {
+        document.getElementById("score"+this.cursorPosition).innerText=score;
+    } 
+
     setScorePlayer1(score=this.score) {
         document.getElementById("score1").innerText=score;
     }
+
     setScorePlayer2(score=this.score) {
         document.getElementById("score2").innerText=score;
     }
@@ -169,15 +193,25 @@ export class Key {
     }
 
     cursorUp() {
+        if (this.cursorRow == 0 && this.isLastElement) return;
+        if (this.isInactiveArea && this.scoreCount <= 1) return;
+        this.recalculateScore();
+
         let elementsLeft=Array.from(document.querySelectorAll("#history-player1>div:not(.header)"));
         let elementsRight=Array.from(document.querySelectorAll("#history-player2>div:not(.header)"));
-        this.findCursor(elementsLeft,0)
-        this.findCursor(elementsRight,0)
+        this.findCursor(elementsLeft,0);
+        this.findCursor(elementsRight,0);
+
     }
 
     cursorDown() {
+        if (this.cursorRow == 0 && this.isLastElement) return;
+        if (this.isInactiveArea && this.scoreCount <= 1) return;
+        this.recalculateScore();
+
         let elementsLeft=Array.from(document.querySelectorAll("#history-player1>div:not(.header)"));
         let elementsRight=Array.from(document.querySelectorAll("#history-player2>div:not(.header)"));
+        
         this.findCursor(elementsLeft,1)
         this.findCursor(elementsRight,1)
     }
@@ -199,6 +233,7 @@ export class Key {
             this.cursorRow == elements.length-1 &&
             elements[elements.length-1].firstElementChild.innerText.trim() == ""
         ) return;
+        this.recalculateScore();
 
             // this.replaceChildren(elements[this.cursorRow]);
         // elements[this.cursorRow].firstElementChild=""
@@ -280,8 +315,26 @@ export class Key {
 
     }
 
-    changeScore() {
+    recalculateScore() {
+        let score = this.scoreStart;
+        let elements=Array.from(document.querySelectorAll(`#history-player${this.cursorPosition}>div:not(.header)`));
+        for (let element of elements) {
+            let scoreElement=element.firstElementChild;
+            let sumElement=element.lastElementChild;
+            let isDisplay=scoreElement.firstElementChild == this.display;
 
+            if (sumElement.innerText.trim() == "") break;
+            // if (scoreElement.innerText.trim()=="" && !isDisplay) return; 
+
+            if (isDisplay) {
+                score -= +this.display.value;    
+            } else {
+                score -= +scoreElement.innerText.trim();
+            }
+
+            sumElement.innerText=score;
+        }
+        this.scoreOfCursorPosition=score;
     }
 
     calculatePlayerScore() {
@@ -324,11 +377,12 @@ export class Key {
         }
 
         this.throws[this.activePlayerId].push(this.display.value);
-        // dbgame.insert({
-        //  playerNr: this.activePlayerId,
-        //  throw: this.cursorRow,
-        //  score: this.display.value,
-        // });
+        this.dbGame.insertThrow({
+            legId: this.legId,
+            playerNr: this.activePlayerId,
+            round: this.cursorRow,
+            score: this.display.value,
+        });
 
             // if (dart.isAllowedThrow()) {
         if (this.calculatePlayerScore()) {

@@ -1,0 +1,129 @@
+Name: dart_
+Table:
+
+Tabels for one Game
+dart_leg
+    int id autoincrement ThorwId
+    int legId 
+    tiny int playernr: 1 or 2
+    tiny int round: 0-120 
+    small int score: 0-180
+    tiny int score1: 0-60
+    tiny int score2: 0-60
+    tiny int score3: 0-60
+
+dart_playerOfGame:
+    int id autoincrement
+    int gameId
+    int playerId
+    int team; if double team 1 or team 2, 0 if caller
+
+
+dart_game:
+    int id autoincrement
+    tiny int set: 0-20
+    tiny int leg: 0-20
+    int legId
+    datetime start
+    datetime end
+
+
+Tables for Player 
+dart_player
+    int id: 
+    varchar firstname
+    varchar lastname
+    varchar mail: contact mail and login
+    varchar tel: contact telephone
+    varchar passwordHash
+    tiniy int visibleName: Name 0=not visible, 1=visible for Admninistration, 2 = visible for all
+    tiniy int visibleAll: Name 0=not visible, 1=visible for Admninistration
+
+dart_playerRequest
+    int id;
+    int playerId: Player that ask for access and play the event
+    int eventId:  Event that is opened
+    varchar eventHash: the player creates a Hashtag only for the Event, the Event can request the Player only by identification
+    tiny int playerStatus: 0 = player denies event, 1= player allows event
+    tiny int eventStatus: 0 = events denies player, 1= event allows player
+    tiny int playerHasPayed: 0 = not payed, 1=payed
+
+Tabels for Teams
+dart_team
+    int id;
+    int manager; Player who may change Teamdata
+    varchar name
+    varchar address
+    varchar mail
+    varchar tel
+
+dart_teamlist
+    int id;
+    int teamId
+    int playerId
+
+Tables for events
+dart_events
+    int id;
+    varchar name
+    varchar street
+    varchar plz
+    varchar city
+    dateTime dateStart   Time and Date of beginning
+    dateTime dateEnd     Time and Date of ending
+
+dart_eventGroup
+    int id;
+    eventId;
+
+dart_plan
+    int id;
+    datetime date;
+    int type; 0 main round, 1 = alternative round ("Trostrunde")
+    int round: 0 = keine KO runde, 1 = 1. Runde, usw,
+    int callerId;
+    int player1Id;
+    int Player2Id;
+    int Player3Id; for double Play
+    int Player4Id; for double Play
+    int gameId;
+    int boardId;
+    int groupId;
+    int description; "Trostrunde 8tel Finale"
+    int priority; each game getrs a priority 
+        eg: 4 Boards 8Games, the first 4 games get P1 the Rest 2
+        eg: 4 Boards 16 Games KO, 
+            the first 4 games get P1 
+        game 5 to 8 Prio 2, 
+        game 9 to 12 Prio 3
+        game 13-16 Prio 4
+        then Remain 8 Games
+        Game 17-20 get Prio 5
+        Game 21-24 get Prio 6
+        then remain 4 Games
+        Game 25-28 get Prio 7
+        then remain 2 Games
+        Game 29-30 get Prio 8
+        and last Game gets Prio 9
+
+
+dart_board
+    int id;
+    varchar ip Ip addresse des Geräts wo die Software geladen ist
+    int deviceId eindeutige Nummer mit der das angeschlossene Gerät identifizierbar ist
+                 hier hilft ein request,
+                 das Gerät meldet sich am Server mit der richtigen ID an
+                 
+        
+
+
+
+    varchar paypal: paypal mail
+
+
+
+
+
+
+
+
